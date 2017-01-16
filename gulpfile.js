@@ -259,12 +259,12 @@ function copyStatic() {
  */
 function serve() {
   const options = {
-    snippetOptions: {
-      rule: {
-        match: /<\/body>/i,
-        fn: () => "<link rel='stylesheet' href='./browser-sync-client-transition/browser-sync-client.min.css' /><script async src='./browser-sync-client-transition/browser-sync-client.min.js'></script>",
-      },
-    },
+//    snippetOptions: {
+//      rule: {
+//      match: /<\/body>/i,
+//        fn: () => "<link rel='stylesheet' href='./browser-sync-client-transition/browser-sync-client.min.css' /><script async src='./browser-sync-client-transition/browser-sync-client.min.js'></script>",
+//      },
+//    },
     serveStatic: [
       {
         route: "/browser-sync-client-transition",
@@ -278,9 +278,9 @@ function serve() {
     open: OPEN_TAB,
   };
 
-  options.snippetOptions.rule.fn = function() {
-    return "<link rel='stylesheet' href='./browser-sync-client-transition/browser-sync-client.min.css' /><script async src='./browser-sync-client-transition/browser-sync-client.min.js'></script>";
-  };
+//  options.snippetOptions.rule.fn = function() {
+//    return "<link rel='stylesheet' href='./browser-sync-client-transition/browser-sync-client.min.css' /><script async src='./browser-sync-client-transition/browser-sync-client.min.js'></script>";
+//  };
 
   let server = argv.proxy || false;
   if (server) {
