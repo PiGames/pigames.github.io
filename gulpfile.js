@@ -1,5 +1,5 @@
 /* eslint comma-dangle: 0 */
-/* eslint-disable no-unused-vars, import/no-extraneous-dependencies, strict */
+/* eslint-disable */
 
 "use strict";
 
@@ -16,7 +16,6 @@ const watch = require("gulp-watch");
 
 // SASS
 const autoprefixer = require("gulp-autoprefixer");
-const cssmin = require("gulp-cssmin");
 const filter = require("gulp-filter");
 const sass = require("gulp-sass");
 
@@ -33,11 +32,16 @@ const stripDebug = require("gulp-strip-debug");
 const uglify = require("gulp-uglify");
 const watchify = require("watchify");
 
+/* eslint-enable */
+
+/* eslint-disable no-unused-vars */
+
 // Constants
 const SOURCE_PATH = "./src";
 const BUILD_PATH = "./build";
-const STATIC_FILES = ["/img", "/*.html", "/*.php"]; // relative to /src/
-const KEEP_FILES = false;
+const STATIC_FILES = ["/html/**", "/img/**", "*.html"]; // relative to /src/
+const SCRIPTS_TO_WATCH = [`${SOURCE_PATH}/js/script.js`];
+const KEEP_FILES = true;
 const OPEN_TAB = argv.open || argv.o;
 
 // Do not change this one!
@@ -76,6 +80,37 @@ function logError(err) {
 }
 
 /**
+ * Copies folders from folders specified in STATIC_FOLDERS.
+ */
+function copyStatic() {
+  STATIC_FILES.forEach((v) => {
+    let path;
+    let output;
+    if (fs.existsSync(`${SOURCE_PATH}${v}`) && fs.lstatSync(`${SOURCE_PATH}${v}`).isDirectory()) {
+      path = `${SOURCE_PATH}${v}`;
+      output = `${BUILD_PATH}${v}`;
+
+      path += "/*.*";
+    } else {
+      let file = v;
+      if (v[0] !== "/") {
+        file = `/${file}`;
+      }
+
+      path = `${SOURCE_PATH}${file}`;
+      output = `${BUILD_PATH}${file}`;
+
+      output = output.split("/");
+      output.pop();
+      output = output.join("/");
+    }
+
+    gulp.src(path)
+      .pipe(gulp.dest(output));
+  });
+}
+
+/**
  * Deletes all content inside the './build' folder.
  * If 'keepFiles' is true, no files will be deleted. This is a dirty workaround since we can't have
  * optional task dependencies :(
@@ -86,6 +121,8 @@ function cleanBuild() {
     del(["build/**/*.*"]);
     // del(["build/**/"]);
   }
+
+  copyStatic();
 }
 
 /**
@@ -171,7 +208,6 @@ function buildSass() {
     .pipe(sass(options))
     .pipe(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7"))
     .pipe(gulpif(!isProduction(), sourcemaps.write("./")))
-    .pipe(gulpif(isProduction(), cssmin()))
     .pipe(gulp.dest(`${BUILD_PATH}/css`))
     .pipe(filter(["**/*.css"]))
     .pipe(browserSync.stream());
@@ -212,44 +248,6 @@ function watchStatic() {
     }
 
     STATIC_FILES_TO_WATCH.push(path);
-  });
-}
-
-/**
- * Copies folders from folders specified in STATIC_FOLDERS.
- */
-function copyStatic() {
-  STATIC_FILES.forEach((v) => {
-    let path;
-    let output;
-    if (fs.existsSync(`${SOURCE_PATH}${v}`) && fs.lstatSync(`${SOURCE_PATH}${v}`).isDirectory()) {
-      path = `${SOURCE_PATH}${v}`;
-      output = `${BUILD_PATH}${v}`;
-
-      path += "/*.*";
-    } else {
-      let file = v;
-      if (v[0] !== "/") {
-        file = `/${file}`;
-      }
-
-      path = `${SOURCE_PATH}${file}`;
-      output = `${BUILD_PATH}${file}`;
-
-      output = output.split("/");
-      output.pop();
-      output = output.join("/");
-    }
-
-    if (fs.existsSync(path) || v.indexOf("*") >= 0) {
-      gulp.src(path)
-        .pipe(gulp.dest(output));
-    } else {
-      logError({
-        name: "No file or directory found",
-        message: `’${SOURCE_PATH}${v}’ not found!`
-      });
-    }
   });
 }
 
@@ -302,7 +300,9 @@ gulp.task("sass", buildSass);
 gulp.task("pug", buildPug);
 
 gulp.task("watchScripts", () => {
-  buildScript(true, `${SOURCE_PATH}/js/script.js`);
+  SCRIPTS_TO_WATCH.forEach((v) => {
+    buildScript(true, v);
+  });
 });
 
 gulp.task("watchStatic", () => {

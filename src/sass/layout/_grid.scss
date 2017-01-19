@@ -1,0 +1,19 @@
+main, footer p {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+
+  @media (min-width: 768px) {
+    width: 750px;
+    padding: 0;
+  }
+
+  @media (min-width: 992px) {
+    width: 970px;
+  }
+
+  @media (min-width: 1200px) {
+    width: 1170px;
+  }
+}
