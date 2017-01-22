@@ -38,6 +38,9 @@ nav ul li {
 nav ul li a {
   padding-right: 2px;
   color: $nav-text-color;
-  line-height: 72px;
   text-decoration: none;
+}
+
+@media query {
+  
 }
