@@ -41,6 +41,45 @@ nav ul li a {
   text-decoration: none;
 }
 
-@media query {
-  
-}
+@media (max-width: 1222px) {
+
+  nav img.logo-img {
+    margin-left: 60px;
+  }
+
+  nav ul {
+    left: 0;
+    margin: 0;
+    padding-left: 35px;
+  }
+
+  }
+
+  @media (max-width: 1148px) {
+    nav ul {
+      background-color:$nav-background;
+      display: block;
+      position: fixed;
+      right: 0;
+      top: 72px;
+
+      font-size: 24px;
+      height: 100%;
+    }
+
+    nav ul li {
+      display: block;
+      margin: 0;
+      height: 50px;
+      text-align: center;
+    }
+
+    nav ul li:first-child {
+      padding-top: 35px;
+    }
+
+    nav ul li a {
+      padding-right: 2px;
+    }
+
+  }

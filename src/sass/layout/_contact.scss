@@ -4,15 +4,24 @@ section.section-contact header {
 
 form label {
   display: block;
-  margin-bottom: 2px;
+  margin-top: 10px;
 }
 
 form input {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  width: 300px;
+  height: 39px;
 }
 
-form textarea {
+form input#submit {
+  width: 98px;
+  height: 44px;
+  margin-top: 10px;
+}
+
+form label textarea {
   display: block;
   width: 935px;
+  height: 207px;
 }

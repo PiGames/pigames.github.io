@@ -1,14 +1,22 @@
 main section .slider-about-project{
+}
+
+main section img.img-slider-about-project{
+ display: block;
  width: 1100px;
 }
 
-main section figcaption{
- 
-}
 
 main section img.img-slider-about-us{
   width: 276px;
+  height: 276px;
   border-radius: 100%;
   display: block;
   margin: auto;
+}
+
+main section figcaption{
+ padding-top: 15px;
+ margin: 8px auto;
+ font-size: 20px;
 }
