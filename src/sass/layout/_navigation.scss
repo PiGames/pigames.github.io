@@ -11,7 +11,7 @@ nav {
 
 nav img.logo-img {
   height: 64px;
-  margin-left: 212px;
+  margin-left: 60px;
 }
 
 nav span.logo-text {
@@ -36,7 +36,7 @@ nav ul li {
 }
 
 nav ul li a {
-  padding-right: 2px;
+  padding-right: 6px;
   color: $nav-text-color;
   text-decoration: none;
 }
@@ -44,7 +44,7 @@ nav ul li a {
 @media (max-width: 1222px) {
 
   nav img.logo-img {
-    margin-left: 60px;
+    margin-left: 30px;
   }
 
   nav ul {
@@ -56,6 +56,19 @@ nav ul li a {
   }
 
   @media (max-width: 1148px) {
+
+    nav img.logo-img {
+      display: none;
+    }
+
+  }
+
+  @media (max-width: 800px) {
+
+    nav img.logo-img {
+      display: block;
+    }
+
     nav ul {
       background-color:$nav-background;
       display: block;
