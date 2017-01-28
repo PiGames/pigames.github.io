@@ -4,6 +4,10 @@ header.header-name-studio {
   margin-top: 72px;
   background-color: $header-background;
   color: $header-text-color;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 header.header-name-studio h1 {

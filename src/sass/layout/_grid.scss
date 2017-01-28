@@ -1,11 +1,13 @@
 main, footer p {
   width: 100%;
   margin: 0 auto;
+  margin-top: 88px;
   padding: 0 16px;
   box-sizing: border-box;
 
   @media (min-width: 768px) {
     width: 750px;
+    margin-top: 0;
     padding: 0;
   }
 
