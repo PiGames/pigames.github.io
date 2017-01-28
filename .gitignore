@@ -59,4 +59,4 @@ node_modules/
 
 # Project
 build/
-.publish
+.publish/
