@@ -1,15 +1,21 @@
-main section .slider-about-project {
-}
-
-main section img.img-slider-about-project {
-  display: block;
+main section #slider-about-project header {
   width: 100%;
-  box-sizing: border-box;
 
   @media (min-width: 768px) {
-    width: 50%;
+    width: 66%;
     margin: 0 auto;
   }
+}
+
+main section .img-slider-about-project {
+  display: block;
+  width: 100%;
+  margin-bottom: 24px;
+  padding-bottom: 56%;
+  border-radius: 2px;
+  background-position: center;
+  background-size: cover;
+  box-sizing: border-box;
 }
 
 main section .img-slider-about-us {
@@ -20,10 +26,4 @@ main section .img-slider-about-us {
   border-radius: 100%;
   background-position: center center;
   background-size: cover;
-}
-
-main section figcaption {
-  margin: 8px auto;
-  padding-top: 15px;
-  font-size: 20px;
 }

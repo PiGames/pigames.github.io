@@ -1,5 +1,5 @@
-
-$background-color: #fff;
+$background-color: #fafafa;
+$text-color: #111;
 
 $nav-background: #5a5a5a;
 $nav-text-color: #fff;
@@ -10,3 +10,9 @@ $header-text-color: #fff;
 $footer-border: 1px solid #95989a;
 
 $link-color: #2b95ff;
+
+// Breakpoints
+$mobile: 768px;
+$tablet: 996px;
+$desktop-sm: 1200px;
+$desktop-xl: 1360px;
