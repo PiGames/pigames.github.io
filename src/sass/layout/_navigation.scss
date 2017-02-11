@@ -27,17 +27,36 @@ nav main .logo {
     display: flex;
     align-items: center;
   }
+
+  @media (max-width: 995px) {
+    display: flex;
+    align-items: center;
+  }
+
 }
 
-nav img.logo-img {
+nav main img.logo-img {
   height: 48px;
   margin-right: 8px;
+
+  @media (max-width: 996px) {
+
+    position: absolute;
+    right: 10px;
+  }
+
 }
 
 nav span.logo-text {
+
+  display: none;
+
+  @media (min-width: 996px) {
+  display: inline-block;
   font-size: 24px;
   font-weight: 600;
   line-height: 72px;
+  }
 }
 
 nav ul {
@@ -60,4 +79,21 @@ nav ul li a {
   padding: 0 4px;
   color: $nav-text-color;
   text-decoration: none;
+}
+
+nav main button.open-small-menu {
+  color: #ffffff;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 60px;
+  margin-left: 10px;
+  display: none;
+  cursor: pointer;
+
+  @media (max-width: 996px) {
+    display: inline-block;
+    position: absolute;
+    left: 10px;
+  }
+
 }
