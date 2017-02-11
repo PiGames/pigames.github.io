@@ -82,18 +82,56 @@ nav ul li a {
 }
 
 nav main button.open-small-menu {
-  color: #ffffff;
+  /*color: #ffffff;
   border: none;
   background-color: rgba(255, 255, 255, 0);
   font-size: 50px;
   margin-left: 10px;
   display: none;
-  cursor: pointer;
+  cursor: pointer;*/
+  display: none;
+
+
+  width: 40px;
+  height: 35px;
+  border: 0;
+  border-top: 5px solid #ffffff;
+  background: transparent;
+  position: relative;
+  transition: 0.3s transform linear;
 
   @media (max-width: 996px) {
     display: inline-block;
     position: absolute;
     left: 10px;
+
   }
 
 }
+
+
+nav main button.open-small-menu::before, nav main button.open-small-menu::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-top: 5px solid #ffffff;
+  transform: translateY(10px);
+}
+
+
+nav main button.open-small-menu::after {
+  transform: translateY(25px);
+  transition: 0.3s transform linear;
+  border-top: 5px solid #ffffff;
+}
+/*
+nav main button.open-small-menu:focus {
+  transform: rotate(45deg) translateY(5px);
+  border: none;
+}
+
+nav main button.open-small-menu:focus::after {
+  transform: rotate(-90deg) translateX(-10px);
+}*/
