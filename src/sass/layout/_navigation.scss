@@ -44,7 +44,6 @@ nav main img.logo-img {
     position: absolute;
     right: 10px;
   }
-
 }
 
 nav span.logo-text {
@@ -81,17 +80,8 @@ nav ul li a {
   text-decoration: none;
 }
 
-nav main button.open-small-menu {
-  /*color: #ffffff;
-  border: none;
-  background-color: rgba(255, 255, 255, 0);
-  font-size: 50px;
-  margin-left: 10px;
+.button-open-small-menu {
   display: none;
-  cursor: pointer;*/
-  display: none;
-
-
   width: 40px;
   height: 35px;
   border: 0;
@@ -104,13 +94,11 @@ nav main button.open-small-menu {
     display: inline-block;
     position: absolute;
     left: 10px;
-
   }
-
 }
 
 
-nav main button.open-small-menu::before, nav main button.open-small-menu::after {
+.button-open-small-menu::before, .button-open-small-menu::after {
   content: '';
   position: absolute;
   top: 0;
@@ -121,17 +109,18 @@ nav main button.open-small-menu::before, nav main button.open-small-menu::after 
 }
 
 
-nav main button.open-small-menu::after {
+.button-open-small-menu::after {
   transform: translateY(25px);
   transition: 0.3s transform linear;
   border-top: 5px solid #ffffff;
 }
-/*
-nav main button.open-small-menu:focus {
+
+
+#main-horizontal-menu.nav-horizontal-menu .button-open-small-menu:focus {
   transform: rotate(45deg) translateY(5px);
   border: none;
 }
 
-nav main button.open-small-menu:focus::after {
+#main-horizontal-menu.nav-horizontal-menu .button-open-small-menu:focus::after {
   transform: rotate(-90deg) translateX(-10px);
-}*/
+}
