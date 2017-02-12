@@ -51,10 +51,10 @@ nav span.logo-text {
   display: none;
 
   @media (min-width: 996px) {
-  display: inline-block;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 72px;
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 72px;
   }
 }
 
@@ -116,34 +116,35 @@ nav ul li a {
   border-top: 5px solid #ffffff;
 }
 
+@media (max-width: 996px) {
+  #main-horizontal-menu.nav-horizontal-menu .button-open-small-menu:focus {
+    transform: rotate(45deg) translateY(5px);
+    border: none;
+  }
 
-#main-horizontal-menu.nav-horizontal-menu .button-open-small-menu:focus {
-  transform: rotate(45deg) translateY(5px);
-  border: none;
-}
-
-#main-horizontal-menu.nav-horizontal-menu .button-open-small-menu:focus::after {
-  transform: rotate(-90deg) translateX(-10px);
-}
+  #main-horizontal-menu.nav-horizontal-menu .button-open-small-menu:focus::after {
+    transform: rotate(-90deg) translateX(-10px);
+  }
 
 
-#main-horizontal-menu.nav-horizontal-menu .logo{
-  z-index: 900;
-}
+  #main-horizontal-menu.nav-horizontal-menu .logo{
+    z-index: 900;
+  }
 
-#main-horizontal-menu.nav-horizontal-menu ul{
-  display: block;
-  position: fixed;
-  top: 53px;
-  left: 0;
-  width: 70%;
-  height: 100%;
-  background-color: #474747;
-  padding-left: 4px;
-  margin-top: 3px;
-}
+  #main-horizontal-menu.nav-horizontal-menu ul{
+    display: block;
+    position: fixed;
+    top: 53px;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    background-color: #474747;
+    padding-left: 4px;
+    margin-top: 3px;
+  }
 
-#main-horizontal-menu.nav-horizontal-menu ul li{
-  display: block;
-  padding-top: 10px;
+  #main-horizontal-menu.nav-horizontal-menu ul li{
+    display: block;
+    padding-top: 10px;
+  }
 }
