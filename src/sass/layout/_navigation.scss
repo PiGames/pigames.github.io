@@ -6,11 +6,10 @@ nav {
   height: 56px;
   background-color: $nav-background;
   color: $nav-text-color;
+  z-index: 1;
 
   @media (min-width: 768px) {
     height: 72px;
-    //position: fixed;
-
   }
 }
 
@@ -32,7 +31,6 @@ nav main .logo {
   @media (max-width: 995px) {
     display: flex;
     align-items: center;
-    //z-index: 999;
   }
 
 }
@@ -127,24 +125,25 @@ nav ul li a {
 #main-horizontal-menu.nav-horizontal-menu .button-open-small-menu:focus::after {
   transform: rotate(-90deg) translateX(-10px);
 }
-/*
+
+
+#main-horizontal-menu.nav-horizontal-menu .logo{
+  z-index: 900;
+}
+
 #main-horizontal-menu.nav-horizontal-menu ul{
   display: block;
-  //position: fixed;
+  position: fixed;
   top: 53px;
   left: 0;
   width: 70%;
   height: 100%;
   background-color: #474747;
   padding-left: 4px;
-  //z-index: 10;
-  border: 1px solid red;
+  margin-top: 3px;
 }
 
 #main-horizontal-menu.nav-horizontal-menu ul li{
   display: block;
-}*/
-/*
-#main-horizontal-menu.nav-horizontal-menu ul li:first-child{
-  padding-top: 70px;
-}*/
+  padding-top: 10px;
+}
