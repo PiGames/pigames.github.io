@@ -17,7 +17,14 @@ $(function() {
 
 var hamburger = document.getElementsByClassName('button-open-small-menu')[0];
 hamburger.addEventListener('click', function () {
-  document.getElementById('main-horizontal-menu').classList.toggle('nav-horizontal-menu');
+  var horizontalMenu = document.getElementById('main-horizontal-menu');
+  var horizontalMenuUL = horizontalMenu.querySelector( 'ul' );
+
+  var isULOpen = horizontalMenuUL.classList.contains( 'slide-in' );
+
+  horizontalMenuUL.setAttribute( 'class', isULOpen ? 'slide-out' : 'slide-in');
+
+  horizontalMenu.classList.toggle('nav-horizontal-menu');
 },false);
 
 var close = document.getElementsByClassName('active-link');

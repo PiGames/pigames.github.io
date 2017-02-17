@@ -131,7 +131,7 @@ nav ul li a {
     z-index: 900;
   }
 
-  #main-horizontal-menu.nav-horizontal-menu ul{
+  #main-horizontal-menu ul{
     display: block;
     position: fixed;
     top: 53px;
@@ -141,9 +141,27 @@ nav ul li a {
     background-color: #474747;
     padding-left: 4px;
     margin-top: 3px;
+    transform: translateX(-100%);
   }
 
-  #main-horizontal-menu.nav-horizontal-menu ul li{
+  .slide-in {
+      animation: slide-in 0.5s forwards;
+  }
+
+  .slide-out {
+    animation: slide-out 0.5s forwards;
+  }
+
+  @keyframes slide-in {
+    100% { transform: translateX(0%); }
+  }
+
+  @keyframes slide-out {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  #main-horizontal-menu ul li{
     display: block;
     padding-top: 10px;
   }
