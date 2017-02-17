@@ -41,19 +41,21 @@
       <h1>We are PiGames</h1>
     </header>
     <main>
-      <section>
+      <section id="kim-jestesmy">
+       <header>
 				<h2>Kim jesteśmy?</h2>
+      </header>
   			<p>
   				Jesteśmy grupą samouków tworzącą studio devolperskie PiGames. Połączyła nas pasja do programowania. Mimo że naszym celem by głównym celem było doskonalenie naszych umiejętności poprzez tworzenie gier komputerowych zdecydowaliśmy że podejdziemy do tego na poważnie. Hobby&nbsp;+&nbsp;Pasja&nbsp;+&nbsp;Umiejętności =&nbsp;Studio&nbsp;Devolperskie.
   			</p>
   		</section>
-  		<section>
+  		<section id="co-robimy">
   		 <header>
   				<h2>Co robimy?</h2>
   		 </header>
   			<p>Do tej pory mamy na koncie własną wersję Boombermana. Chyba każdy gracz na świecie miał okazję zagrać w oryginał lub w przeróżne wersje tej gry. Nasza jest stworzona przy pomocy SFML&nbsp;i&nbsp;C++. Naszych serc nie podbił jeszcze żaden gotowy silnik także obieramy cięższą, ale za to o wiele bardziej rozwijającą drogę. Jednym słowem - samorozwój górą ;D Obecnie pracujemy nad klonem gry “Antitoy”, która jednak w naszej wersji zostanie przeznaczona na PC (SFML i C++). Po tej rozgrzewce ruszymy z naszą grą, której bazą będzie nasz własny pomysł.</p>
   		</section>
-  		<section>
+  		<section id="nasze-projekty">
   			<header>
   				<h2>Nasze projekty</h2>
   			</header>
@@ -68,7 +70,7 @@
           </main>
         </div>
       </section>
-      <section>
+      <section id="o-nas">
         <header>
           <h2>O nas</h2>
         </header>
@@ -82,7 +84,7 @@
           </main>
         </div>
       </section>
-      <section>
+      <section id="współpraca">
       <header>
         <h2>Współpraca</h2>
       </header>
@@ -93,7 +95,7 @@
         Co możesz zyskać dzięki współpracy z nami? Spełnienie marzeń i współudział w tworzeniu gier lub po prostu zyskanie świetnego portfolio do późniejszej pracy lub też możliwość pochwalenia się swoim talentem całemu światu. Jeśli więc dotyczy Cię któryś z wymienionych powodów pytaj śmiało o szczegóły ;)
       </p>
     </section>
-     <section class="section-contact">
+     <section class="section-contact" id="kontakt">
         <header >
           <h2>Kontakt</h2>
         </header>
@@ -102,10 +104,28 @@
           <label id = "email">Twój email<input name="email" input type="email" placeholder="Email" required></label>
           <label id = "message">Twoja wiadomość<textarea rows="5" cols="30" placeholder="Wiadomość" required></textarea></label>
           <input id ="submit"  type ="submit" value="Wyślij"></input>
+          <div class="g-repatch" data-sitekey="tutaj kod chyba Ty musisz wpisa :D"></div>
         </form>
   		</section>
     </main>
     <footer><p>Design by <a href="https://github.com/bibixx">bibixx</a> | Code by <a href="https://github.com/nOoOwA">nowa</a></p></footer>
     <script src="./js/script.js" charset="utf-8"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+	  <script>
+    $(function() {
+$('a[href*="#"]:not([href="#"])').click(function() {
+if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+var target = $(this.hash);
+target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+if (target.length) {
+  $('html, body').animate({
+    scrollTop: target.offset().top
+  }, 1500);
+  return false;
+}
+}
+});
+});
+  </script>
   </body>
 </html>
