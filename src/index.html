@@ -109,23 +109,7 @@
   		</section>
     </main>
     <footer><p>Design by <a href="https://github.com/bibixx">bibixx</a> | Code by <a href="https://github.com/nOoOwA">nowa</a></p></footer>
+    <script src="./js/jquery-3.1.1.min.js"></script>
     <script src="./js/script.js" charset="utf-8"></script>
-    <script src="js/jquery-3.1.1.min.js"></script>
-	  <script>
-    $(function() {
-$('a[href*="#"]:not([href="#"])').click(function() {
-if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-var target = $(this.hash);
-target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-if (target.length) {
-  $('html, body').animate({
-    scrollTop: target.offset().top
-  }, 1500);
-  return false;
-}
-}
-});
-});
-  </script>
   </body>
 </html>
