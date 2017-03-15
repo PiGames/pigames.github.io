@@ -82,70 +82,85 @@ nav ul li a {
 
 .button-open-small-menu {
   display: none;
-  width: 40px;
-  height: 35px;
-  border: 0;
-  border-top: 5px solid #ffffff;
-  background: transparent;
   position: relative;
-  transition: 0.3s transform linear;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40px;
+  height: 30px;
+  padding: 0;
+  border: 0;
   outline: none;
+  background: transparent;
+  cursor: pointer;
 
   @media (max-width: 996px) {
-    display: inline-block;
+    display: flex;
     position: absolute;
     left: 10px;
   }
+
+  div {
+    width: 40px;
+    height: 4px;
+    transition: opacity .2s ease-in-out;
+    border-radius: 2px;
+    background: $hamburger-color;
+    opacity: 1;
+
+    &:nth-child(2) {
+      position: relative;
+      background: none;
+
+      &::before, &::after {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: rotate(0deg);
+        transition: transform .2s ease-in-out;
+        border-radius: 2px;
+        background: $hamburger-color;
+        content: '';
+      }
+    }
+  }
 }
 
-
-.button-open-small-menu::before, .button-open-small-menu::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  border-top: 5px solid #ffffff;
-  transform: translateY(10px);
-}
-
-
-.button-open-small-menu::after {
-  transform: translateY(25px);
-  transition: 0.3s transform linear;
-  border-top: 5px solid #ffffff;
-}
 
 @media (max-width: 996px) {
-  #main-horizontal-menu.nav-horizontal-menu .button-open-small-menu:focus {
-    transform: rotate(45deg) translateY(5px);
-    border: none;
+  #main-horizontal-menu.nav-horizontal-menu .button-open-small-menu {
+    div {
+      opacity: 0;
+
+      &:nth-child(2) {
+        opacity: 1;
+
+        &::before {
+          transform: rotate(-45deg);
+        }
+
+        &::after {
+          transform: rotate(45deg);
+        }
+      }
+    }
   }
 
-  #main-horizontal-menu.nav-horizontal-menu .button-open-small-menu:focus::after {
-    transform: rotate(-90deg) translateX(-10px);
-  }
-
-
-  #main-horizontal-menu.nav-horizontal-menu .logo{
-    z-index: 900;
-  }
-
-  #main-horizontal-menu ul{
+  #main-horizontal-menu ul {
     display: block;
     position: fixed;
     top: 53px;
     left: 0;
     width: 70%;
     height: 100%;
-    background-color: #474747;
-    padding-left: 4px;
     margin-top: 3px;
+    padding-left: 4px;
     transform: translateX(-100%);
+    background-color: $menu-color;
   }
 
   .slide-in {
-      animation: slide-in 0.5s forwards;
+    animation: slide-in 0.5s forwards;
   }
 
   .slide-out {
@@ -161,7 +176,7 @@ nav ul li a {
     100% { transform: translateX(-100%); }
   }
 
-  #main-horizontal-menu ul li{
+  #main-horizontal-menu ul li {
     display: block;
     padding-top: 10px;
   }
