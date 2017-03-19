@@ -1,0 +1,31 @@
+body > main
+  width: 100%
+  margin: 0 auto
+
+  & > section
+    display: flex
+    flex-direction: column
+    justify-content: center
+    width: 100%
+    min-height: 40vh
+    margin: 0 auto
+
+    &:nth-child(2n)
+      background: $section-accent
+
+    &:first-of-type
+      margin-top: 0
+
+    & > div
+      padding: 48px 32px
+
+      @media (min-width: 768px)
+        width: 700px
+        margin: 0 auto
+        padding: 48px 0
+
+      @media (min-width: 992px)
+        width: 900px
+
+      @media (min-width: 1200px)
+        width: 1100px

@@ -1,0 +1,40 @@
+.contact-form
+  form
+    display: flex
+    flex-direction: column
+    width: 100%
+    margin: 16px auto
+
+    @media (min-width: 768px)
+      width: 70%
+
+
+    label
+      text-align: left
+      cursor: pointer
+
+    input, textarea, button
+      width: 100%
+      margin: 8px 0
+      padding: 4px 8px
+      transition: border-color .2s ease-in-out
+      border: 1px solid $input-border
+      border-radius: 2px
+      outline: 0
+      background: $input-background
+      font-family: "Nunito", sans-serif
+      box-sizing: border-box
+
+      &:focus
+        border-color: $input-border-focus
+
+    textarea
+      min-width: 100%
+      max-width: 100%
+
+    button
+      display: inline-block
+      align-self: flex-start
+      width: auto
+      padding: 8px 16px
+      cursor: pointer

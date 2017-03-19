@@ -204,7 +204,7 @@ function buildSass() {
     options.style = "compressed";
   }
 
-  return gulp.src(`${SOURCE_PATH}/sass/**/*.scss`)
+  return gulp.src(`${SOURCE_PATH}/sass/**/*.sass`)
     .pipe(sourcemaps.init())
     .pipe(sass(options))
     .pipe(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7"))
@@ -311,7 +311,7 @@ gulp.task("watchStatic", () => {
 });
 
 gulp.task("watch", ["copyStatic", "sass", "pug", "watchStatic", "watchScripts"], () => {
-  watch(`${SOURCE_PATH}/sass/**/*.scss`, () => {
+  watch(`${SOURCE_PATH}/sass/**/*.sass`, () => {
     gulp.start("sass");
   });
 
