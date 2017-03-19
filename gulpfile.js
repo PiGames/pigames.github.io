@@ -61,22 +61,22 @@ function isProduction() {
  * Logs the current build mode on the console.
  */
 function logBuildMode() {
-  if (isProduction()) {
-    gutil.log(gutil.colors.green("Running production build..."));
+  if ( isProduction() ) {
+    gutil.log( gutil.colors.green( "Running production build..." ) );
   } else {
-    gutil.log(gutil.colors.red("Running development build..."));
+    gutil.log( gutil.colors.red( "Running development build..." ) );
   }
 }
 
 /**
  * Handles errors
  */
-function logError(err) {
-  if (err.fileName) {
-    gutil.log(`${gutil.colors.red(err.name)}: ${gutil.colors.yellow(err.fileName.replace(`${__dirname}/src/js/`, ""))}: Line ${gutil.colors.magenta(err.lineNumber)} & Column ${gutil.colors.magenta(err.columnNumber || err.column)}: ${gutil.colors.blue(err.description)}`);
+function logError( err ) {
+  if ( err.fileName ) {
+    gutil.log( `${gutil.colors.red( err.name )}: ${gutil.colors.yellow( err.fileName.replace( `${__dirname}/src/js/`, "" ) )}: Line ${gutil.colors.magenta( err.lineNumber )} & Column ${gutil.colors.magenta( err.columnNumber || err.column )}: ${gutil.colors.blue( err.description )}` );
   } else {
     // Browserify error..
-    gutil.log(`${gutil.colors.red(err.name)}: ${gutil.colors.yellow(err.message)}`);
+    gutil.log( `${gutil.colors.red( err.name )}: ${gutil.colors.yellow( err.message )}` );
   }
 }
 
@@ -84,31 +84,31 @@ function logError(err) {
  * Copies folders from folders specified in STATIC_FOLDERS.
  */
 function copyStatic() {
-  STATIC_FILES.forEach((v) => {
+  STATIC_FILES.forEach( ( v ) => {
     let path;
     let output;
-    if (fs.existsSync(`${SOURCE_PATH}${v}`) && fs.lstatSync(`${SOURCE_PATH}${v}`).isDirectory()) {
+    if ( fs.existsSync( `${SOURCE_PATH}${v}` ) && fs.lstatSync( `${SOURCE_PATH}${v}` ).isDirectory() ) {
       path = `${SOURCE_PATH}${v}`;
       output = `${BUILD_PATH}${v}`;
 
       path += "/*.*";
     } else {
       let file = v;
-      if (v[0] !== "/") {
+      if ( v[0] !== "/" ) {
         file = `/${file}`;
       }
 
       path = `${SOURCE_PATH}${file}`;
       output = `${BUILD_PATH}${file}`;
 
-      output = output.split("/");
+      output = output.split( "/" );
       output.pop();
-      output = output.join("/");
+      output = output.join( "/" );
     }
 
-    gulp.src(path)
-      .pipe(gulp.dest(output));
-  });
+    gulp.src( path )
+      .pipe( gulp.dest( output ) );
+  } );
 }
 
 /**
@@ -118,8 +118,8 @@ function copyStatic() {
  * Note: keepFiles is set to true by gulp.watch (see serve()) and reseted here to avoid conflicts.
  */
 function cleanBuild() {
-  if (!KEEP_FILES) {
-    del(["build/**/*.*"]);
+  if ( !KEEP_FILES ) {
+    del( ["build/**/*.*"] );
     // del(["build/**/"]);
   }
 
@@ -129,12 +129,12 @@ function cleanBuild() {
 /**
  * Converts time to appropriate unit.
  */
-function showDuration(t) {
-  if (t >= 1000) {
+function showDuration( t ) {
+  if ( t >= 1000 ) {
     return `${t / 1000} s`;
   }
 
-  if (t <= 1) {
+  if ( t <= 1 ) {
     return `${t * 1000} μs`;
   }
 
@@ -146,48 +146,48 @@ function showDuration(t) {
  * Creates sourcemaps if production.
  * Uglifies if not in production.
  */
-function buildScript(toWatch, path) {
-  const filename = path.split("/").pop();
-  let bundler = browserify(path, {
+function buildScript( toWatch, path ) {
+  const filename = path.split( "/" ).pop();
+  let bundler = browserify( path, {
     basedir: __dirname,
     debug: true,
     cache: {},
     packageCache: {},
     fullPaths: toWatch,
     plugin: [watchify],
-  });
+  } );
 
-  if (toWatch) {
-    bundler = watchify(bundler);
+  if ( toWatch ) {
+    bundler = watchify( bundler );
   }
 
-  bundler.transform("babelify", { presets: ["es2015"] });
+  bundler.transform( "babelify", { presets: ["es2015"] } );
 
   const rebundle = function() {
     const timer = Date.now();
 
-    const stream = bundler.bundle().on("end", () => {
-      gutil.log(`Started '${gutil.colors.cyan("scripts")}' ('${gutil.colors.cyan(filename)}')...`);
-    });
+    const stream = bundler.bundle().on( "end", () => {
+      gutil.log( `Started '${gutil.colors.cyan( "scripts" )}' ('${gutil.colors.cyan( filename )}')...` );
+    } );
 
     return stream
-      .on("error", logError)
-      .pipe(source(filename))
-      .pipe(buffer())
-      .pipe(sourcemaps.init({ loadMaps: true }))
-      .pipe(gulpif(isProduction(), stripDebug()))
-      .pipe(gulpif(isProduction(), uglify()))
-      .pipe(gulpif(!isProduction(), sourcemaps.write("./")))
-      .pipe(gulp.dest(`${BUILD_PATH}/js`))
-      .on("end", () => {
-        const taskName = `'${gutil.colors.cyan("scripts")}' ('${gutil.colors.cyan(filename)}')`;
-        const taskTime = gutil.colors.magenta(showDuration(Date.now() - timer));
-        gutil.log(`Finished ${taskName} after ${taskTime}`);
-      })
-      .pipe(browserSync.stream());
+      .on( "error", logError )
+      .pipe( source( filename ) )
+      .pipe( buffer() )
+      .pipe( sourcemaps.init( { loadMaps: true } ) )
+      .pipe( gulpif( isProduction(), stripDebug() ) )
+      .pipe( gulpif( isProduction(), uglify() ) )
+      .pipe( gulpif( !isProduction(), sourcemaps.write( "./" ) ) )
+      .pipe( gulp.dest( `${BUILD_PATH}/js` ) )
+      .on( "end", () => {
+        const taskName = `'${gutil.colors.cyan( "scripts" )}' ('${gutil.colors.cyan( filename )}')`;
+        const taskTime = gutil.colors.magenta( showDuration( Date.now() - timer ) );
+        gutil.log( `Finished ${taskName} after ${taskTime}` );
+      } )
+      .pipe( browserSync.stream() );
   };
 
-  bundler.on("update", rebundle);
+  bundler.on( "update", rebundle );
   return rebundle();
 }
 
@@ -200,31 +200,31 @@ function buildSass() {
     style: "expanded",
   };
 
-  if (isProduction()) {
+  if ( isProduction() ) {
     options.style = "compressed";
   }
 
-  return gulp.src(`${SOURCE_PATH}/sass/**/*.sass`)
-    .pipe(sourcemaps.init())
-    .pipe(sass(options))
-    .pipe(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7"))
-    .pipe(gulpif(!isProduction(), sourcemaps.write("./")))
-    .pipe(gulp.dest(`${BUILD_PATH}/css`))
-    .pipe(filter(["**/*.css"]))
-    .pipe(browserSync.stream());
+  return gulp.src( `${SOURCE_PATH}/sass/**/*.sass` )
+    .pipe( sourcemaps.init() )
+    .pipe( sass( options ) )
+    .pipe( autoprefixer( "last 1 version", "> 1%", "ie 8", "ie 7" ) )
+    .pipe( gulpif( !isProduction(), sourcemaps.write( "./" ) ) )
+    .pipe( gulp.dest( `${BUILD_PATH}/css` ) )
+    .pipe( filter( ["**/*.css"] ) )
+    .pipe( browserSync.stream() );
 }
 
 /**
  * Generates pug.
  */
 function buildPug() {
-  return gulp.src(`${SOURCE_PATH}/*.pug`)
+  return gulp.src( `${SOURCE_PATH}/*.pug` )
     .pipe(
-      pug({
+      pug( {
         "pretty": isProduction(),
-      })
+      } )
     )
-    .pipe(gulp.dest(BUILD_PATH))
+    .pipe( gulp.dest( BUILD_PATH ) )
     .pipe(
       browserSync.stream()
     );
@@ -234,22 +234,22 @@ function buildPug() {
  * Adds paths to array conatining files that will be watched.
  */
 function watchStatic() {
-  STATIC_FILES.forEach((v) => {
+  STATIC_FILES.forEach( ( v ) => {
     let path;
-    if (fs.existsSync(`${SOURCE_PATH}${v}`) && fs.lstatSync(`${SOURCE_PATH}${v}`).isDirectory()) {
+    if ( fs.existsSync( `${SOURCE_PATH}${v}` ) && fs.lstatSync( `${SOURCE_PATH}${v}` ).isDirectory() ) {
       path = `${SOURCE_PATH}${v}`;
       path += "/*.*";
     } else {
       let file = v;
-      if (v[0] !== "/") {
+      if ( v[0] !== "/" ) {
         file = `/${file}`;
       }
 
       path = `${SOURCE_PATH}${file}`;
     }
 
-    STATIC_FILES_TO_WATCH.push(path);
-  });
+    STATIC_FILES_TO_WATCH.push( path );
+  } );
 }
 
 /**
@@ -282,8 +282,8 @@ function serve() {
 //  };
 
   let server = argv.proxy || false;
-  if (server) {
-    if (typeof server === "boolean") {
+  if ( server ) {
+    if ( typeof server === "boolean" ) {
       server = "localhost";
     }
 
@@ -292,49 +292,49 @@ function serve() {
     options.server = BUILD_PATH;
   }
 
-  browserSync(options);
+  browserSync( options );
 }
 
-gulp.task("cleanBuild", cleanBuild);
-gulp.task("copyStatic", copyStatic);
-gulp.task("sass", buildSass);
-gulp.task("pug", buildPug);
+gulp.task( "cleanBuild", cleanBuild );
+gulp.task( "copyStatic", copyStatic );
+gulp.task( "sass", buildSass );
+gulp.task( "pug", buildPug );
 
-gulp.task("watchScripts", () => {
-  SCRIPTS_TO_WATCH.forEach((v) => {
-    buildScript(true, v);
-  });
-});
+gulp.task( "watchScripts", () => {
+  SCRIPTS_TO_WATCH.forEach( ( v ) => {
+    buildScript( true, v );
+  } );
+} );
 
-gulp.task("watchStatic", () => {
+gulp.task( "watchStatic", () => {
   watchStatic();
-});
+} );
 
-gulp.task("watch", ["copyStatic", "sass", "pug", "watchStatic", "watchScripts"], () => {
-  watch(`${SOURCE_PATH}/sass/**/*.sass`, () => {
-    gulp.start("sass");
-  });
+gulp.task( "watch", ["copyStatic", "sass", "pug", "watchStatic", "watchScripts"], () => {
+  watch( `${SOURCE_PATH}/sass/**/*.sass`, () => {
+    gulp.start( "sass" );
+  } );
 
-  watch(`${SOURCE_PATH}/*.pug`, () => {
-    gulp.start("pug");
-  });
+  watch( `${SOURCE_PATH}/*.pug`, () => {
+    gulp.start( "pug" );
+  } );
 
-  watch(STATIC_FILES_TO_WATCH, () => {
+  watch( STATIC_FILES_TO_WATCH, () => {
     copyStatic();
     browserSync.reload();
-  });
-});
+  } );
+} );
 
-gulp.task("serve", ["cleanBuild", "watch"], serve);
+gulp.task( "serve", ["cleanBuild", "watch"], serve );
 
-gulp.task("default", ["serve"], logBuildMode);
+gulp.task( "default", ["serve"], logBuildMode );
 
-gulp.task("deploy", () => {
+gulp.task( "deploy", () => {
   const msg = argv.message || argv.m || null;
   const options = { branch: "master", force: true };
-  if (msg !== null) {
+  if ( msg !== null ) {
     options.message = msg;
   }
 
-  return gulp.src("./build/**/*").pipe(ghPages(options));
-});
+  return gulp.src( "./build/**/*" ).pipe( ghPages( options ) );
+} );
