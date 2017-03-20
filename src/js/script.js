@@ -64,6 +64,8 @@ $( "#menu-visible" ).change( function() {
 } );
 
 $( "a[href*='#']" ).click( function( e ) {
+  $( "#menu-visible" ).prop( "checked", false );
+  $( "body" ).removeClass( "menu-open" );
   e.preventDefault();
 
   const hash = $( this ).attr( "href" ).substring( 1 );
