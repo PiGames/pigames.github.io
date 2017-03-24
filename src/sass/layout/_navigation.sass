@@ -79,6 +79,9 @@ nav#topbar
     visibility: hidden
     overflow-y: scroll
 
+  .desktop-menu
+    display: none
+
   ul
     position: absolute
     top: 0
@@ -152,7 +155,10 @@ nav#topbar
       opacity: 0
       visibility: hidden
 
-    ul
+    ul.mobile-menu
+      display: none
+
+    ul.desktop-menu
       display: flex
       position: absolute
       top: 0
