@@ -1,4 +1,14 @@
 #o-nas
+  .slider
+    nav
+      @media (max-width: 470px)
+        position: relative
+        width: 100%
+        margin: 32px auto
+        padding-bottom: calc(50% + 6px)
+        box-sizing: border-box
+
+
   .person-image
     width: 200px
     height: 200px
@@ -8,3 +18,9 @@
     background-position: center
     background-size: cover
     box-sizing: border-box
+
+    @media (max-width: 470px)
+      width: 50%
+      height: auto
+      padding-bottom: 50%
+      box-sizing: border-box

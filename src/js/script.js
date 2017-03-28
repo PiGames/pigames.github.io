@@ -1,11 +1,8 @@
 function resizeSliders() {
   $( ".slider" ).each( function() {
-    let size = 0;
-    $( this ).find( ".slide" ).each( function() {
-      size = Math.max( size, $( this ).outerHeight() );
+    $( this ).css( {
+      minHeight: $( this ).find( ".slide.active" ).outerHeight(),
     } );
-
-    $( this ).css( { height: size } );
   } );
 }
 
@@ -26,6 +23,10 @@ $( ".slider-next" ).click( function() {
     $slide
       .next()
       .addClass( "active" );
+
+    $slider.css( {
+      minHeight: $slide.next().outerHeight(),
+    } );
   }
 
   if ( $slider.find( ".slide.active" ).is( ":last-child" ) ) {
@@ -48,6 +49,10 @@ $( ".slider-prev" ).click( function() {
 
     $slide.prev().prev()
       .addClass( "prev" );
+
+    $slider.css( {
+      minHeight: $slide.prev().outerHeight(),
+    } );
   }
 
   if ( $slider.find( ".slide.active" ).is( ":first-child" ) ) {

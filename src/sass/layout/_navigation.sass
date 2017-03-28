@@ -123,14 +123,19 @@ nav#topbar
         text-decoration: none
         box-sizing: border-box
 
-  #menu-visible:checked
-    & ~ .mobile-background
-      transition: opacity .2s ease-in-out, visibility 0s 0s
-      opacity: 1
-      visibility: visible
+  #menu-visible
+    &:not(:checked)
+      & ~ ul li a
+        outline: 0
 
-    & ~ ul
-      transform: translateX(0)
+    &:checked
+      & ~ .mobile-background
+        transition: opacity .2s ease-in-out, visibility 0s 0s
+        opacity: 1
+        visibility: visible
+
+      & ~ ul
+        transform: translateX(0)
 
 
   @media (min-width: 992px)

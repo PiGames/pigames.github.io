@@ -1,5 +1,6 @@
 .slider
   position: relative
+  transition: min-height .3s ease-in-out
   overflow: hidden
 
   &.on-beggining
@@ -49,3 +50,6 @@
 
     &.active
       transform: translateX(0%)
+
+    @media (max-width: 470px)
+      padding: 0
