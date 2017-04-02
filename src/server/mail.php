@@ -31,6 +31,15 @@ if (isset($_POST["g-recaptcha-response"])) {
   $captcha = $_POST["g-recaptcha-response"];
 }
 
+if ( !(isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["subject"]) && isset($_POST["message"])) ) {
+  json(array(
+    "success" => false,
+    "error_codes" => array("missing-on-of-arguments")
+  ));
+
+  exit;
+}
+
 if (!$captcha) {
   json(array(
     "success" => false,

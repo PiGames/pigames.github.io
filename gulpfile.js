@@ -8,11 +8,12 @@ const argv = require("yargs").argv;
 const browserSync = require("browser-sync");
 const del = require("del");
 const fs = require("fs");
+const ghPages = require('gulp-gh-pages');
 const gulp = require("gulp");
 const gulpif = require("gulp-if");
 const gutil = require("gulp-util");
-const sourcemaps = require("gulp-sourcemaps");
 const historyApiFallback = require('connect-history-api-fallback');
+const sourcemaps = require("gulp-sourcemaps");
 const watch = require("gulp-watch");
 
 // SASS
@@ -320,3 +321,13 @@ gulp.task( "watch", ["copyStatic", "sass", "pug", "watchStatic", "watchScripts"]
 gulp.task( "serve", ["cleanBuild", "watch"], serve );
 
 gulp.task( "default", ["serve"], logBuildMode );
+
+gulp.task( "deploy", () => {
+  const msg = argv.message || argv.m || null;
+  const options = { branch: "master", force: true };
+  if ( msg !== null ) {
+    options.message = msg;
+  }
+
+  return gulp.src( "./build/**/*" ).pipe( ghPages( options ) );
+} );
