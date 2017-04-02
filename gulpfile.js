@@ -12,8 +12,8 @@ const gulp = require("gulp");
 const gulpif = require("gulp-if");
 const gutil = require("gulp-util");
 const sourcemaps = require("gulp-sourcemaps");
+const historyApiFallback = require('connect-history-api-fallback');
 const watch = require("gulp-watch");
-const ghPages = require('gulp-gh-pages');
 
 // SASS
 const autoprefixer = require("gulp-autoprefixer");
@@ -54,7 +54,7 @@ const STATIC_FILES_TO_WATCH = [];
  * Simple way to check for development/production mode.
  */
 function isProduction() {
-  return argv.production;
+  return argv.production || argv.p;
 }
 
 /**
@@ -72,11 +72,13 @@ function logBuildMode() {
  * Handles errors
  */
 function logError( err ) {
-  if ( err.fileName ) {
-    gutil.log( `${gutil.colors.red( err.name )}: ${gutil.colors.yellow( err.fileName.replace( `${__dirname}/src/js/`, "" ) )}: Line ${gutil.colors.magenta( err.lineNumber )} & Column ${gutil.colors.magenta( err.columnNumber || err.column )}: ${gutil.colors.blue( err.description )}` );
+  if ( err.plugin === "gulp-sass" ) {
+    gutil.log( `${gutil.colors.yellow( "SASS error" )}: ${gutil.colors.red( err.messageOriginal.slice( 0, -1 ) )} in ${gutil.colors.cyan( err.relativePath )} on line ${err.line}, column ${err.column}` );
+  } else if ( err.fileName ) {
+    gutil.log( `${gutil.colors.yellow( err.name )}: ${gutil.colors.red( err.fileName.replace( `${__dirname}/src/js/`, "" ) )}: Line ${gutil.colors.magenta( err.lineNumber )} & Column ${gutil.colors.magenta( err.columnNumber || err.column )}: ${gutil.colors.blue( err.description )}` );
   } else {
     // Browserify error..
-    gutil.log( `${gutil.colors.red( err.name )}: ${gutil.colors.yellow( err.message )}` );
+    gutil.log( `${gutil.colors.yellow( err.name )}: ${gutil.colors.red( err.message )}` );
   }
 }
 
@@ -206,7 +208,7 @@ function buildSass() {
 
   return gulp.src( `${SOURCE_PATH}/sass/**/*.sass` )
     .pipe( sourcemaps.init() )
-    .pipe( sass( options ) )
+    .pipe( sass( options ).on( "error", logError ) )
     .pipe( autoprefixer( "last 1 version", "> 1%", "ie 8", "ie 7" ) )
     .pipe( gulpif( !isProduction(), sourcemaps.write( "./" ) ) )
     .pipe( gulp.dest( `${BUILD_PATH}/css` ) )
@@ -258,12 +260,6 @@ function watchStatic() {
  */
 function serve() {
   const options = {
-//    snippetOptions: {
-//      rule: {
-//      match: /<\/body>/i,
-//        fn: () => "<link rel='stylesheet' href='./browser-sync-client-transition/browser-sync-client.min.css' /><script async src='./browser-sync-client-transition/browser-sync-client.min.js'></script>",
-//      },
-//    },
     serveStatic: [
       {
         route: "/browser-sync-client-transition",
@@ -276,10 +272,6 @@ function serve() {
     ],
     open: OPEN_TAB,
   };
-
-//  options.snippetOptions.rule.fn = function() {
-//    return "<link rel='stylesheet' href='./browser-sync-client-transition/browser-sync-client.min.css' /><script async src='./browser-sync-client-transition/browser-sync-client.min.js'></script>";
-//  };
 
   let server = argv.proxy || false;
   if ( server ) {
@@ -328,13 +320,3 @@ gulp.task( "watch", ["copyStatic", "sass", "pug", "watchStatic", "watchScripts"]
 gulp.task( "serve", ["cleanBuild", "watch"], serve );
 
 gulp.task( "default", ["serve"], logBuildMode );
-
-gulp.task( "deploy", () => {
-  const msg = argv.message || argv.m || null;
-  const options = { branch: "master", force: true };
-  if ( msg !== null ) {
-    options.message = msg;
-  }
-
-  return gulp.src( "./build/**/*" ).pipe( ghPages( options ) );
-} );

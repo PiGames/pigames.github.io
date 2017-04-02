@@ -12,7 +12,7 @@
         "jquery": true
     },
     "globals": {
-        "bouncefix": true
+        "grecaptcha": true
     },
     "rules": {
         "quotes": ["error", "double"],
