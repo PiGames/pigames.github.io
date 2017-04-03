@@ -3,15 +3,19 @@ header('Access-Control-Allow-Origin: *');
 
 include "secret.php"; // contains definition of secret key
 
-function mail_utf8($to, $from_user, $from_email, $subject = '(No subject)', $message = '') {
-  $from_user = "=?UTF-8?B?".base64_encode($from_user)."?=";
+function mail_utf8($to, $from_user_root, $from_email, $subject = '(No subject)', $message = '') {
+  $from_user = "=?UTF-8?B?".base64_encode($from_user_root)."?=";
   $subject = "=?UTF-8?B?".base64_encode($subject)."?=";
 
-  $headers = "From: $from_user <$from_email>\r\n";
+  $headers  = "From: PiGames – Kontakt <contact@pigam.es>\r\n";
+  $headers .= "Return-Path: PiGames – Kontakt <contact@pigam.es>\r\n";
+  $headers .= "Reply-To: $from_user <$from_email>\r\n";
   $headers .= "MIME-Version: 1.0" . "\r\n";
   $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
   $headers .= "X-Priority: 3\r\n";
   $headers .= "X-Mailer: PHP". phpversion() ."\r\n";
+
+  $message = "Od: $from_user_root<br>$message";
 
   return mail($to, $subject, $message, $headers);
 }
