@@ -56,7 +56,7 @@ $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/
 if ( $response["success"] != false ) {
   // send the actual mail
 
-  mail_utf8("bartosz@legiec.eu", $_POST["name"], $_POST["email"], $_POST["subject"], $_POST["message"]);
+  mail_utf8("pigames.team@gmail.com", $_POST["name"], $_POST["email"], $_POST["subject"], $_POST["message"]);
 }
 
 json( json_encode($response), true );
