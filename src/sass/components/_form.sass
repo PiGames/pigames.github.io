@@ -4,8 +4,8 @@
 
   .g-badge
     display: flex
-    width: 322px
-    height: 60px
+    max-width: 322px
+    min-height: 60px
     border-radius: 2px
     background: $g-background
     font-size: 0
@@ -13,6 +13,7 @@
 
     .g-info
       display: inline-block
+      flex: 5
       padding: 16px
       border-radius: 2px 0 0 2px
 
@@ -37,16 +38,14 @@
 
 
     .g-image
-      display: inline-block
+      display: flex
       flex: 1
-      height: 100%
+      align-items: center
+      justify-content: center
       padding: 8px 16px
       border-radius: 0 2px 2px 0
       background: $g-accent
       box-sizing: border-box
-
-      img
-        height: 100%
 
   form
     display: flex
