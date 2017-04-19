@@ -41,7 +41,7 @@ const watchify = require("watchify");
 // Constants
 const SOURCE_PATH = "./src";
 const BUILD_PATH = "./build";
-const STATIC_FILES = ["/html/**", "/img/*.png", "/img/*.jpg", "/img/*.svg", "/img/*.ico", "*.html", "/js/jquery-3.1.1.min.js", "/favicon.ico"]; // relative to /src/
+const STATIC_FILES = ["/html/**", "/img/*.png", "/img/*.jpg", "/img/*.svg", "/img/*.ico", "*.html", "/js/jquery-3.1.1.min.js", "/favicon.ico", "CNAME"]; // relative to /src/
 const SCRIPTS_TO_WATCH = [`${SOURCE_PATH}/js/script.js`];
 const KEEP_FILES = true;
 const OPEN_TAB = argv.open || argv.o;
