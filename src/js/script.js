@@ -107,7 +107,7 @@ function validate( e ) {
     isValid = false;
   }
 
-  if ( $( "#email" ).val() === "" || /^.+@.+\..{2,3}$/.test( $( "#email" ).val() ) === false ) {
+  if ( $( "#email" ).val() === "" || /^.+@.+\..{2,}$/.test( $( "#email" ).val() ) === false ) {
     $( "label[for='email']" ).addClass( "invalid" );
     isValid = false;
   }
