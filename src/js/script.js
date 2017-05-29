@@ -128,7 +128,7 @@ function validate( e ) {
 function send( token ) {
   $.ajax( {
     method: "POST",
-    url: "http://payment.legiec.eu/mail.php",
+    url: "http://b.legiec.eu/pigames/mail.php",
     data: {
       "g-recaptcha-response": token,
       "name": $( "#name" ).val(),
