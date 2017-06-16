@@ -308,7 +308,7 @@ gulp.task( "watch", ["copyStatic", "sass", "pug", "watchStatic", "watchScripts"]
     gulp.start( "sass" );
   } );
 
-  watch( `${SOURCE_PATH}/*.pug`, () => {
+  watch( [`${SOURCE_PATH}/*.pug`, `${SOURCE_PATH}/includes/**/*.pug`], () => {
     gulp.start( "pug" );
   } );
 
