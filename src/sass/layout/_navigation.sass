@@ -83,6 +83,18 @@ nav#topbar
   .desktop-menu
     display: none
 
+    .lang::before
+      display: block
+      height: 24px
+      margin-top: -2px
+      margin-right: 16px
+      border-left: 2px solid $nav-text
+      content: ""
+
+  ul.mobile-menu
+    .lang
+      border-top: 1px solid $menu-divider-color
+
   ul
     position: absolute
     top: 0
@@ -164,6 +176,9 @@ nav#topbar
     ul.mobile-menu
       display: none
 
+      .lang
+        border-top: 1px solid $menu-divider-color
+
     ul.desktop-menu
       display: flex
       position: absolute
@@ -182,6 +197,7 @@ nav#topbar
 
       li
         margin: 0 8px
+        color: $nav-text
         font-size: 18px
 
         &.header

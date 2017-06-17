@@ -1,0 +1,18 @@
+section.our-projects#our-projects
+  div
+    h2 Our projects
+    main.slider.on-beggining
+      nav
+        span.slider-prev
+          i.material-icons chevron_left
+        span.slider-next
+          i.material-icons chevron_right
+      div.slides
+        div.slide.active
+          include projects/ftb.pug
+        div.slide
+          include projects/landit.pug
+        div.slide
+          include projects/pn.pug
+        div.slide
+          include projects/bomberman.pug

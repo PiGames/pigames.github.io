@@ -221,13 +221,24 @@ function buildSass() {
  * Generates pug.
  */
 function buildPug() {
-  return gulp.src( `${SOURCE_PATH}/*.pug` )
+  gulp.src( `${SOURCE_PATH}/*.pug` )
     .pipe(
       pug( {
         "pretty": isProduction(),
       } )
     )
     .pipe( gulp.dest( BUILD_PATH ) )
+    .pipe(
+      browserSync.stream()
+    );
+
+  return gulp.src( `${SOURCE_PATH}/en/*.pug` )
+    .pipe(
+      pug( {
+        "pretty": isProduction(),
+      } )
+    )
+    .pipe( gulp.dest( `${BUILD_PATH}/en` ) )
     .pipe(
       browserSync.stream()
     );
@@ -308,7 +319,7 @@ gulp.task( "watch", ["copyStatic", "sass", "pug", "watchStatic", "watchScripts"]
     gulp.start( "sass" );
   } );
 
-  watch( [`${SOURCE_PATH}/*.pug`, `${SOURCE_PATH}/includes/**/*.pug`], () => {
+  watch( [`${SOURCE_PATH}/*.pug`, `${SOURCE_PATH}/en/*.pug`, `${SOURCE_PATH}/includes/**/*.pug`], () => {
     gulp.start( "pug" );
   } );
 

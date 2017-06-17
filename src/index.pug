@@ -1,23 +1,14 @@
-doctype html
-html
-  include includes/head.pug
+extends layouts/layout.pug
 
-  body
-    include includes/nav.pug
+block content
+  include includes/pl/about-us.pug
 
-    include includes/header.pug
+  include includes/pl/what-are-we-doing.pug
 
-    main
-      include includes/about-us.pug
+  include includes/pl/our-projects.pug
+  
+  include includes/pl/team.pug
 
-      include includes/what-are-we-doing.pug
-
-      include includes/our-projects.pug
-      
-      include includes/team.pug
-
-      include includes/partnership.pug
-      
-      include includes/contact.pug
-
-    include includes/footer.pug
+  include includes/pl/cooperation.pug
+  
+  include includes/pl/contact.pug

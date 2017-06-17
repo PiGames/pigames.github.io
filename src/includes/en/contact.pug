@@ -1,0 +1,28 @@
+section#contact.contact-form
+  div
+    h2 Contact
+    form
+      div.main-form
+        label(for="name") Your name
+        input#name(name="name" type="text" placeholder="Name")
+        label(for="email") Your email
+        input#email(name="email" type="text" placeholder="Email")
+        label(for="subject") Message subject
+        input#subject(name="subject" type="text" placeholder="Subject")
+        label(for="message") Message
+        textarea#message(name="message" placeholder="Message" rows="5")
+        div.g-badge
+          div.g-info
+            p
+              | protected by 
+              strong reCAPTCHA
+            p
+              a(href="https://www.google.com/intl/pl/policies/privacy/" target="_blank") Privacy
+              span(aria-hidden="true" role="presentation")  - 
+              a(href="https://www.google.com/intl/pl/policies/terms/" target="_blank") Terms
+          div.g-image
+            img(src="https://www.gstatic.com/recaptcha/api2/logo_48.png")
+        div.g-recaptcha(data-sitekey="6LdNQBsUAAAAACcG5iiKov4OUNG1ENgcpmzcSA38" data-callback="send" data-size="invisible")
+        button(type="submit" name="button") Send
+      div.form-success
+        h3 Your message have been sent successfully

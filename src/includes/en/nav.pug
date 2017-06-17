@@ -1,0 +1,32 @@
+nav#topbar
+  input#menu-visible(type="checkbox" name="menu-visible" value="")
+  a.logo(href="#header")
+    img.logo-img(src="./img/logo.svg" alt="PiGames logo")
+    span.logo-text PiGames
+
+  label.hamburger(for="menu-visible")
+    div.hamburger-part
+    div.hamburger-part
+    div.hamburger-part
+
+  ul.mobile-menu
+    li.header PiGames
+    li: a(href="#about-us") About us
+    li: a(href="#what-are-we-doing") What are we doing
+    li: a(href="#our-projects") Our projects
+    li: a(href="#team") Team
+    li: a(href="#cooperation") Cooperation
+    li: a(href="#contact") Contact
+    li.lang: a(href="/") Polish
+
+  ul.desktop-menu
+    li.header PiGames
+    li: a(href="#about-us") About us
+    li: a(href="#what-are-we-doing") What are we doing
+    li: a(href="#our-projects") Our projects
+    li: a(href="#team") Team
+    li: a(href="#cooperation") Cooperation
+    li: a(href="#contact") Contact
+    li.lang: a(href="/") Polish
+
+  label.mobile-background(for="menu-visible")
