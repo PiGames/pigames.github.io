@@ -1,3 +1,32 @@
+function getCookie( cname ) {
+  const name = `${cname}=`;
+  const ca = document.cookie.split( ";" );
+  for ( let i = 0; i < ca.length; i++ ) {
+    let c = ca[i];
+
+    while ( c.charAt( 0 ) === " " ) {
+      c = c.substring( 1 );
+    }
+
+    if ( c.indexOf( name ) === 0 ) {
+      return c.substring( name.length, c.length );
+    }
+  }
+  return "";
+}
+
+const languages = navigator.languages;
+
+if ( window.location.pathname.indexOf( "en" ) < 0 && languages.every( ( lang ) => { return lang.indexOf( "pl" ) < 0; } ) && getCookie( "been" ) !== "true" ) {
+  const d = new Date();
+  d.setTime( d.getTime() + ( 365 * 3 * 24 * 60 * 60 * 1000 ) );
+  const expires = `expires=${d.toUTCString()}`;
+  document.cookie = `been=true;${expires};path=/`;
+
+  window.location.replace( `${window.location.origin}/en` );
+}
+
+
 function resizeSliders() {
   $( ".slider" ).each( function() {
     $( this ).css( {
