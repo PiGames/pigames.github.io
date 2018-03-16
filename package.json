@@ -4,6 +4,7 @@
   "description": "Frontend boilerplate for basic projects.",
   "scripts": {
     "start": "gulp",
+    "build": "gulp --production",
     "deploy": "gulp deploy"
   },
   "repository": {
