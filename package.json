@@ -1,10 +1,10 @@
 {
   "name": "frontend-boilerplate",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Frontend boilerplate for basic projects.",
   "scripts": {
     "start": "gulp",
-    "force-deploy": "git push origin :master && git subtree push --prefix build origin master"
+    "deploy": "gulp deploy"
   },
   "repository": {
     "type": "git",
