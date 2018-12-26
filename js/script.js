@@ -1,1 +1,188 @@
-!function e(i,a,s){function t(r,l){if(!a[r]){if(!i[r]){var o="function"==typeof require&&require;if(!l&&o)return o(r,!0);if(n)return n(r,!0);var c=new Error("Cannot find module '"+r+"'");throw c.code="MODULE_NOT_FOUND",c}var d=a[r]={exports:{}};i[r][0].call(d.exports,function(e){var a=i[r][1][e];return t(a||e)},d,d.exports,e,i,a,s)}return a[r].exports}for(var n="function"==typeof require&&require,r=0;r<s.length;r++)t(s[r]);return t}({"/Users/bartoszlegiec/Projects/pigames.github.io/src/js/script.js":[function(e,i,a){"use strict";function s(){$(".slider").each(function(){$(this).css({minHeight:$(this).find(".slide.active").outerHeight()})})}function t(e){!0===e?$("label[for='message'], label[for='email'], label[for='name'], label[for='subject']").addClass("touched"):e&&$("label[for='"+e.target.id+"']").addClass("touched");var i=!0;return $("label[for='message'], label[for='email'], label[for='name'], label[for='subject']").removeClass("invalid"),""===$("#name").val()&&($("label[for='name']").addClass("invalid"),i=!1),""!==$("#email").val()&&!1!==/^.+@.+\..{2,}$/.test($("#email").val())||($("label[for='email']").addClass("invalid"),i=!1),""===$("#subject").val()&&($("label[for='subject']").addClass("invalid"),i=!1),""===$("#message").val()&&($("label[for='message']").addClass("invalid"),i=!1),i}function n(e){$.ajax({method:"POST",url:"http://b.legiec.eu/pigames/mail.php",data:{"g-recaptcha-response":e,name:$("#name").val(),email:$("#email").val(),subject:$("#subject").val(),message:$("#message").val()}}).done(function(e){JSON.parse(e).success&&$("form").addClass("sent")})}function r(){return t(!0)&&grecaptcha.execute(),!1}var l=navigator.languages;if(window.location.pathname.indexOf("en")<0&&l.every(function(e){return e.indexOf("pl")<0})&&"true"!==function(e){for(var i=e+"=",a=document.cookie.split(";"),s=0;s<a.length;s++){for(var t=a[s];" "===t.charAt(0);)t=t.substring(1);if(0===t.indexOf(i))return t.substring(i.length,t.length)}return""}("been")){var o=new Date;o.setTime(o.getTime()+94608e6);var c="expires="+o.toUTCString();document.cookie="been=true;"+c+";path=/",window.location.replace(window.location.origin+"/en")}s(),$(window).resize(s),$("img").one("load",function(){s()}).each(function(){this.complete&&$(this).trigger("load")}),$(".slider-next").click(function(){var e=$(this).parents(".slider"),i=e.find(".slide.active");i.is(":last-child")||(e.removeClass("on-beggining"),i.removeClass("active").addClass("prev"),i.next().addClass("active"),e.css({minHeight:i.next().outerHeight()})),e.find(".slide.active").is(":last-child")&&e.addClass("on-end")}),$(".slider-prev").click(function(){var e=$(this).parents(".slider"),i=e.find(".slide.active");i.is(":first-child")||(e.removeClass("on-end"),i.removeClass("active"),i.prev().removeClass("prev").addClass("active"),i.prev().prev().addClass("prev"),e.css({minHeight:i.prev().outerHeight()})),e.find(".slide.active").is(":first-child")&&e.addClass("on-beggining")}),$("#menu-visible").change(function(){$(this).prop("checked")?$("body").addClass("menu-open"):$("body").removeClass("menu-open")}),$("a[href*='#']").click(function(e){$("#menu-visible").prop("checked",!1),$("body").removeClass("menu-open"),e.preventDefault();var i=$(this).attr("href").substring(1);return $("html, body").animate({scrollTop:$("#"+i).offset().top-$("nav#topbar").height()},500),!1}),window.send=n,$("form").on("submit",r),$("input, textarea").on("input",t)},{}]},{},["/Users/bartoszlegiec/Projects/pigames.github.io/src/js/script.js"]);
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/bartoszlegiec/Projects/pigames.github.io/src/js/script.js":[function(require,module,exports){
+"use strict";
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+
+    while (c.charAt(0) === " ") {
+      c = c.substring(1);
+    }
+
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+var languages = navigator.languages;
+
+if (window.location.pathname.indexOf("en") < 0 && languages.every(function (lang) {
+  return lang.indexOf("pl") < 0;
+}) && getCookie("been") !== "true") {
+  var d = new Date();
+  d.setTime(d.getTime() + 365 * 3 * 24 * 60 * 60 * 1000);
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = "been=true;" + expires + ";path=/";
+
+  window.location.replace(window.location.origin + "/en");
+}
+
+function resizeSliders() {
+  $(".slider").each(function () {
+    $(this).css({
+      minHeight: $(this).find(".slide.active").outerHeight()
+    });
+  });
+}
+
+resizeSliders();
+
+$(window).resize(resizeSliders);
+
+$("img").one("load", function () {
+  resizeSliders();
+}).each(function () {
+  if (this.complete) {
+    $(this).trigger("load");
+  }
+});
+
+$(".slider-next").click(function () {
+  var $slider = $(this).parents(".slider");
+  var $slide = $slider.find(".slide.active");
+
+  if (!$slide.is(":last-child")) {
+    $slider.removeClass("on-beggining");
+    $slide.removeClass("active").addClass("prev");
+
+    $slide.next().addClass("active");
+
+    $slider.css({
+      minHeight: $slide.next().outerHeight()
+    });
+  }
+
+  if ($slider.find(".slide.active").is(":last-child")) {
+    $slider.addClass("on-end");
+  }
+});
+
+$(".slider-prev").click(function () {
+  var $slider = $(this).parents(".slider");
+  var $slide = $slider.find(".slide.active");
+
+  if (!$slide.is(":first-child")) {
+    $slider.removeClass("on-end");
+    $slide.removeClass("active");
+
+    $slide.prev().removeClass("prev").addClass("active");
+
+    $slide.prev().prev().addClass("prev");
+
+    $slider.css({
+      minHeight: $slide.prev().outerHeight()
+    });
+  }
+
+  if ($slider.find(".slide.active").is(":first-child")) {
+    $slider.addClass("on-beggining");
+  }
+});
+
+$("#menu-visible").change(function () {
+  if ($(this).prop("checked")) {
+    $("body").addClass("menu-open");
+  } else {
+    $("body").removeClass("menu-open");
+  }
+});
+
+$("a[href*='#']").click(function (e) {
+  $("#menu-visible").prop("checked", false);
+  $("body").removeClass("menu-open");
+  e.preventDefault();
+
+  var hash = $(this).attr("href").substring(1);
+  $("html, body").animate({
+    scrollTop: $("#" + hash).offset().top - $("nav#topbar").height()
+  }, 500);
+
+  return false;
+});
+
+// Form
+
+function validate(e) {
+  if (e === true) {
+    $("label[for='message'], label[for='email'], label[for='name'], label[for='subject']").addClass("touched");
+  } else if (e) {
+    $("label[for='" + e.target.id + "']").addClass("touched");
+  }
+
+  var isValid = true;
+  $("label[for='message'], label[for='email'], label[for='name'], label[for='subject']").removeClass("invalid");
+
+  if ($("#name").val() === "") {
+    $("label[for='name']").addClass("invalid");
+    isValid = false;
+  }
+
+  if ($("#email").val() === "" || /^.+@.+\..{2,}$/.test($("#email").val()) === false) {
+    $("label[for='email']").addClass("invalid");
+    isValid = false;
+  }
+
+  if ($("#subject").val() === "") {
+    $("label[for='subject']").addClass("invalid");
+    isValid = false;
+  }
+
+  if ($("#message").val() === "") {
+    $("label[for='message']").addClass("invalid");
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+function send(token) {
+  $.ajax({
+    method: "POST",
+    url: "http://b.legiec.eu/pigames/mail.php",
+    data: {
+      "g-recaptcha-response": token,
+      "name": $("#name").val(),
+      "email": $("#email").val(),
+      "subject": $("#subject").val(),
+      "message": $("#message").val()
+    }
+  }).done(function (msg) {
+    var response = JSON.parse(msg);
+
+    if (response.success) {
+      $("form").addClass("sent");
+    }
+  });
+}
+
+function onSubmit() {
+  if (validate(true)) {
+    grecaptcha.execute();
+  }
+
+  return false;
+}
+
+window.send = send;
+
+$("form").on("submit", onSubmit);
+
+$("input, textarea").on("input", validate);
+
+},{}]},{},["/Users/bartoszlegiec/Projects/pigames.github.io/src/js/script.js"])
+
+//# sourceMappingURL=script.js.map
