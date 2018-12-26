@@ -61,3 +61,4 @@ node_modules/
 build/
 .publish/
 src/server/secret.php
+package-lock.json
